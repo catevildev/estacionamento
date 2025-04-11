@@ -13,10 +13,6 @@ O Sistema de Gerenciamento de Estacionamento é uma plataforma web que fornece e
 - `Orientação a Objetos`
 - `PHPUnit`
 
-## Rotas de Depoimentos
-
-![Rotas de Depoimentos](https://github.com/catevildev)
-
 # Documentação das Rotas do Estacionamento
 
 ## Redirecionamento para o Painel
