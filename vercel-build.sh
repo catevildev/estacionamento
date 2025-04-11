@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Checking PHP version..."
+php -v
+
 echo "Installing composer dependencies..."
 composer install --no-dev --optimize-autoloader
 
