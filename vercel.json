@@ -4,7 +4,10 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "vercel-php@0.4.0"
+            "use": "vercel-php@0.4.0",
+            "config": {
+                "runtime": "7.4"
+            }
         },
         {
             "src": "public/**",
@@ -42,6 +45,7 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "array"
+        "SESSION_DRIVER": "array",
+        "PHP_VERSION": "7.4"
     }
 }
