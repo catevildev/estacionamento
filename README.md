@@ -9,7 +9,7 @@ O Sistema de Gerenciamento de Estacionamento é uma plataforma web que fornece e
 | :sparkles: Nome        | **Sistema de Gerenciamento de Estacionamento** |
 | :label: Tecnologias | php, laravel |
 
-![Sistema de Gerenciamento de Estacionamento](https://github.com/igorsimoes4/estacionamento/blob/master/cover.png?raw=true#vitrinedev)
+![Sistema de Gerenciamento de Estacionamento](https://github.com/catevildev/estacionamento-deploy/blob/master/cover.png?raw=true#vitrinedev)
 
 ## Detalhes do Projeto
 ✔️ Técnicas e Tecnologias Utilizadas
@@ -22,7 +22,7 @@ O Sistema de Gerenciamento de Estacionamento é uma plataforma web que fornece e
 
 ## Rotas de Depoimentos
 
-![Rotas de Depoimentos](https://github.com/igorsimoes4/jornadamilhas/assets/41714117/faffa45b-768d-45ca-a8da-7e0a4b6339ff)
+![Rotas de Depoimentos](https://github.com/catevildev)
 
 # Documentação das Rotas do Estacionamento
 
@@ -100,7 +100,7 @@ Observe que esta documentação assume o uso dos nomes de rotas e controladores 
 
 ## Acesso ao Projeto
 
-Você pode acessar o código-fonte completo do projeto no [GitHub](https://github.com/igorsimoes4/estacionamento).
+Você pode acessar o código-fonte completo do projeto no [GitHub](https://github.com/catevildev/estacionamento-deploy).
 
 ## Como Executar o Projeto
 
@@ -118,7 +118,7 @@ Antes de prosseguir, certifique-se de ter as seguintes tecnologias instaladas em
 Clone o repositório do projeto para seu ambiente local usando o seguinte comando Git:
 
 ```bash
-git clone https://github.com/igorsimoes4/estacionamento.git
+git clone https://github.com/catevildev/estacionamento-deploy.git
 ```
 
 ### Passo 2: Instalar as Dependências
@@ -162,7 +162,3 @@ php artisan serve
 O projeto estará disponível em http://localhost:8000.
 
 Agora você pode acessar e testar o Sistema de Gerenciamento de Estacionamento localmente.
-
-# Autor
-
-[<img loading="lazy" src="https://avatars.githubusercontent.com/u/41714117?v=4" width=115><br><sub>Igor Simões da Silveira</sub>](https://github.com/igorsimoes4) 
