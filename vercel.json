@@ -1,7 +1,11 @@
 {
     "version": 2,
-    "framework": "laravel",
+    "framework": null,
     "builds": [
+        {
+            "src": "api/index.php",
+            "use": "vercel-php@0.6.0"
+        },
         {
             "src": "public/**",
             "use": "@vercel/static"
@@ -9,10 +13,23 @@
     ],
     "routes": [
         {
+            "src": "/build/(.*)",
+            "dest": "/public/build/$1"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
+        },
+        {
+            "src": "/robots.txt",
+            "dest": "/public/robots.txt"
+        },
+        {
             "src": "/(.*)",
-            "dest": "/public/index.php"
+            "dest": "/api/index.php"
         }
     ],
+    "buildCommand": "bash ./vercel-build.sh",
     "env": {
         "APP_NAME": "Estacionamento",
         "APP_ENV": "production",
@@ -26,7 +43,6 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "array",
-        "PHP_VERSION": "8.2"
+        "SESSION_DRIVER": "array"
     }
 }
