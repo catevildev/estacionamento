@@ -4,13 +4,6 @@ O Sistema de Gerenciamento de Estacionamento é uma plataforma web que fornece e
 
 ![Selo de Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
-| :placard: Vitrine.Dev | [Visite Meu Perfil](https://cursos.alura.com.br/vitrinedev/igor01silveira) |
-| -------------  | --- |
-| :sparkles: Nome        | **Sistema de Gerenciamento de Estacionamento** |
-| :label: Tecnologias | php, laravel |
-
-![Sistema de Gerenciamento de Estacionamento](https://github.com/catevildev/estacionamento-deploy/blob/master/cover.png?raw=true#vitrinedev)
-
 ## Detalhes do Projeto
 ✔️ Técnicas e Tecnologias Utilizadas
 - `Laravel`
