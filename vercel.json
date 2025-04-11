@@ -4,10 +4,7 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "vercel-php@0.6.0",
-            "config": {
-                "runtime": "8.1"
-            }
+            "use": "vercel-php@0.4.0"
         },
         {
             "src": "public/**",
@@ -32,7 +29,6 @@
             "dest": "/api/index.php"
         }
     ],
-    "buildCommand": "bash ./vercel-build.sh",
     "env": {
         "APP_NAME": "Estacionamento",
         "APP_ENV": "production",
@@ -46,7 +42,6 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "array",
-        "PHP_VERSION": "8.1"
+        "SESSION_DRIVER": "array"
     }
 }
