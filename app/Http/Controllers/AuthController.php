@@ -1,0 +1,136 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use GuzzleHttp\Cookie\SetCookie;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use PHPUnit\Framework\Constraint\ArrayHasKey;
+use Symfony\Component\HttpFoundation\Cookie as HttpFoundationCookie;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Http\Parser\Cookies;
+
+class AuthController extends Controller
+{
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+        $this->middleware('auth:web', ['except' => ['login', 'register', 'logout']]);
+    }
+
+
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        $validator = Validator::make($credentials, [
+            'email' => ['required','string', 'email'],
+            'password' => ['required','string'],
+        ]);
+
+        if($validator->fails()) {
+            Log::error('Erro no Login: ' . $credentials['email'] . $credentials['password']);
+            return redirect(route('login'))->withErrors($validator)->withInput();
+        }
+
+
+        $token = Auth::attempt($credentials);
+        if (!$token) {
+            Log::error('Token não gerado ' . $credentials['email'] . $credentials['password']);
+            Session::flash('error', 'Email e ou Senha Incorretos');
+            return redirect()->route('login')->with([
+                'status' => 'error',
+                'message' => 'Unauthorized',
+            ], 401);
+        }
+
+        $user = Auth::user();
+        Log::info('User loged');
+
+        $cookie = cookie('auth_token', $token, 60);
+
+        return redirect()->route('home')->with([
+            'status' => 'success',
+            'user' => $user,
+            'authorisation' => [
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ])->cookie($cookie);
+    }
+
+    public function register(Request $request)
+    {
+        Log::info('Iniciando registro de usuário', ['dados' => $request->all()]);
+
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6',
+            ]);
+
+            Log::info('Validação passou, criando usuário');
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            Log::info('Usuário criado com sucesso', ['user' => $user]);
+
+            $token = Auth::login($user);
+            Log::info('Token gerado', ['token' => $token]);
+
+            $cookie = cookie('auth_token', $token, 60);
+
+            return redirect()->route('home')->with([
+                'status' => 'success',
+                'message' => 'User created successfully',
+                'user' => $user,
+                'authorisation' => [
+                    'token' => $token,
+                    'type' => 'bearer',
+                ]
+            ])->cookie($cookie);
+        } catch (\Exception $e) {
+            Log::error('Erro ao registrar usuário', [
+                'erro' => $e->getMessage(),
+                'linha' => $e->getLine(),
+                'arquivo' => $e->getFile()
+            ]);
+
+            return redirect()->back()->with('error', 'Erro ao criar usuário: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function logout()
+    {
+        setcookie('auth_token', "");
+        return redirect()->route('login');
+    }
+
+    public function refresh()
+    {
+        return response()->json([
+            'status' => 'success',
+            'user' => Auth::user(),
+            'authorisation' => [
+                'token' => Auth::refresh(),
+                'type' => 'bearer',
+            ]
+        ]);
+    }
+}

@@ -1,0 +1,16 @@
+/vendor
+/node_modules
+.env
+.env.*
+.git
+.gitignore
+.idea
+.vscode
+/storage/*.key
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
+/tests
+/database/*.sqlite
+*.log
